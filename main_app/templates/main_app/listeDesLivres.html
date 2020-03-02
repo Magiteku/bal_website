@@ -1,0 +1,10 @@
+{%extends "base.html" %}
+{% block title%}BookInner | Livres disponibles {%endblock%}
+{% block content %}
+    <h1>Livres actuellement présent dans nos boîtes à livres</h1>
+    <ul>
+        {%for livre in livres%}
+        <!-- <li><a href = url_de_la_description_du_livre_obtenu_avec_un_custom_tag/></li>-->
+        {%endfor%}
+    </ul>
+{%endblock%}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+    {% load static %}
+    <head>
+        <meta charset = "utf-8"/>
+        {% block title %}{# Titre de la page #} {%endblock%}
+        {% block nav %}
+        <nav> 
+            <ul> 
+                <li><a href = {% url 'forum_home' %}>Vers le forum</a></li>
+                <li><a href = {%url 'subscription' %}> Inscription/Connexion </a></li>
+                {% comment %}
+                La ligne ci-dessus devra être modifié de tel sorte à ce qu'elle change selon si l'utilisateur
+                est connecté ou pas. L'url doit donc être une variable, idem pour le texte qui l'accompagne 
+                {%endcomment%}
+            </ul>
+        </nav>
+        {%comment%}
+        A rajouter:  l'image bookinner avec un lien associé qui permet de retourner à la page principal
+                    La barre de recherche
+        {%endcomment%}
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block content %} {# Contenu principal de la page #}{% endblock %}
+        {% block footer %}
+            <footer>
+                <ul>
+                    <li><a href = {% url 'about-us'%}> A propos </a></li>
+                    <li><a href = {% url 'contact-us'%}> Nous contacter </a></li>
+                </ul>
+            </footer>
+        {% endblock %}
+    </body>
+
+</html>
