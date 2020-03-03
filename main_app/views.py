@@ -20,16 +20,19 @@ def home(request):
     return render(request, 'main_app/accueil.html')
 
 def to_forum(request):
-    pass
+    return render(request, 'main_app/forum.html')
 
 def to_subscription(request):
     pass
 
 def to_about(request):
-    pass
+    return render(request, 'main_app/about_us.html')
 
 def to_contact(request):
     pass
+
+def to_profile(request):
+    return render(request, 'main_app/profile.html')
 
 def to_bookList(request):
     """ Redirige vers une page contenant l'ensemble des livres disponibles
