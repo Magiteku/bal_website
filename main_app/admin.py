@@ -11,7 +11,7 @@ class LivreAdmin(admin.ModelAdmin):
     list_filter = ('titre','auteur','note') # champs permettant de filtrer les livres
     ordering = ('titre',) # champs à partir desquels les livres sont ordonnées
     search_fields = ('titre', 'auteur', 'note', 'isbn') # champs utilisés pour rechercher les livres
-    fields = ('')
+    #fields = ('')
 
 
 admin.site.register(models.Livre, LivreAdmin)
