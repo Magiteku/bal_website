@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title%}<title> BookInner | {{livre.titre}} </title> {% endblock %}
+{% block content %}
+    <h1>{{livre.titre}}</h1>
+    {# Mettre la couverture ici #}
+    <img src = "{{livre.couverture.url}}" />
+    <ul>
+        <li>Auteur: {{livre.auteur}} </li>
+        <li>Edition: {{livre.edition}} </li>
+        <li>Resumé: {{livre.resume}}</li>
+        <li>Note: {{livre.note}} </li>
+        <li>ISBN: {{livre.isbn}} </li>
+        {# A compléter avec les autres champs #}
+    </ul>
+{% endblock %}
