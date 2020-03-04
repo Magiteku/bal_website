@@ -49,3 +49,29 @@ class Livre(models.Model):
         """Retourne l'url permettant d'acceder à la description du livre """
 
         return reverse('main_app.views.to_bookList').replace('list',self.slug_title)
+
+
+class Membre(models.Model):
+    """ Membre de la communauté Bookinner """
+
+    pseudo = models.CharField(max_length = 50)
+    nom = models.CharField(max_length = 50)
+    prenom = models.CharField(max_length = 50)
+    imageProfil = models.ImageField(upload_to = "imagesDeProfil/")
+    slug_pseudo = models.SlugField(default = "")
+    class Meta:
+        ordering = ['pseudo']
+    
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug_pseudo = slugify(self.pseudo)
+
+        super(Membre,self).save(*args, **kwargs)
+
+    def __str__(self):
+
+        s = "Pseudo du membre: " + self.pseudo + \
+            "\nIdentité du membre: " + self.prenom + " " + self.nom 
+        return s
+
+    
