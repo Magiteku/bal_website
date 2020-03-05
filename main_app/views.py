@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Livre
+from .models import Livre, Membre
 # Create your views here.
 
 EMPLACEMENT_LIVRE = "book"
@@ -29,10 +29,12 @@ def to_about(request):
     return render(request, 'main_app/about_us.html')
 
 def to_contact(request):
-    pass
+    return render(request, 'main_app/contact.html')
 
-def to_profile(request):
-    return render(request, 'main_app/profile.html')
+def to_profile(request,pseudoSlug):
+    membre = Membre.objects.filter(slug_pseudo = pseudoSlug)
+    """ Vérifier que le membre est connecté"""
+    return render(request, 'main_app/profile.html',locals())
 
 def to_bookList(request):
     """ Redirige vers une page contenant l'ensemble des livres disponibles
@@ -50,4 +52,8 @@ def to_book(request,bookSlug):
     # l'identifier individuellement. Ici cependant, ce n'est pas un problème
     return render(request,"main_app/descriptionLivre.html",locals())
 
-# A faire : les templates et les routages urls
+def to_login(request):
+    """Redirige vers la page de connexion """
+
+    return render(request,"main_app/login.html")
+

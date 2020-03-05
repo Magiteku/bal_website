@@ -7,9 +7,10 @@ urlpatterns = [
     path('inscription/', views.to_subscription, name = 'subscription'),
     path('about-us', views.to_about, name = 'about-us'),
     path('contact-us', views.to_contact, name = 'contact-us'),
-    path('profile', views.to_profile, name='profile'),
+    path('profile/<slug:pseudoSlug>', views.to_profile, name='profile'),
     path(views.EMPLACEMENT_LIVRE + '/list', views.to_bookList, name = 'book-list'),
     path(views.EMPLACEMENT_LIVRE + '/<slug:bookSlug>', views.to_book, name = "book"),
+    path('login', views.to_login, name = 'login'),
 ] 
 
 #EMPLACEMENT_LIVRE = "book/"

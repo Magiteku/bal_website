@@ -3,6 +3,7 @@
 {% block title %}<title>BookInner | Page d'accueil</title> {%endblock%}
 {% block content %}
     <header>
+      <script type="text/javascript" src="{% static "main_app/js/accueil.js" %}"></script>
     </header>
 
     <body>
@@ -12,7 +13,7 @@
     </div>
     <select name="option" id="select-option">
        <option value="">--Selectionnez une option de recherche--</option>
-       <option value="bookinner">Boite à Livre</option>
+       <option value="town">Ville</option>
        <option value="book">Livre</option>
        <option value="user">Utilisateur</option>
     </select>
@@ -22,13 +23,6 @@
         </div>
     </body>
 
-        <script>
-        function initMap() {
-            var besancon = {lat: 47.247315, lng: 5.999222};
-            var map = new google.maps.Map(document.getElementById('map'), {zoom: 5.5, center: besancon});
-            var marker = new google.maps.Marker({position: besancon, map: map})
-        }
-        </script>
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdhMDAHADc7gKxLgJBWx6AoFj2yKrbW0c&callback=initMap">
         </script>

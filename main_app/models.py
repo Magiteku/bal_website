@@ -54,11 +54,13 @@ class Livre(models.Model):
 class Membre(models.Model):
     """ Membre de la communauté Bookinner """
 
-    pseudo = models.CharField(max_length = 50)
+    pseudo = models.CharField(max_length = 50, unique=True)
     nom = models.CharField(max_length = 50)
     prenom = models.CharField(max_length = 50)
     imageProfil = models.ImageField(upload_to = "imagesDeProfil/")
-    slug_pseudo = models.SlugField(default = "")
+    slug_pseudo = models.SlugField(default = "", unique = True)
+
+    """Rajouté un booléan pour vérifier la connection """
     class Meta:
         ordering = ['pseudo']
     
