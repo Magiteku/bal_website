@@ -1,12 +1,38 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}<title>BookInner | Page d'accueil</title> {%endblock%}
 {% block content %}
     <header>
     </header>
 
     <body>
-    <h1> Rechercher vos livres sur la carte ! </h1>
+    <img style="height:30%; width:30%" src="{% static "main_app/images/logo.png" %}">
+    <div id="research-bar">
+        <input/><button><i class='fa fa-search'></i></button>
+    </div>
+    <select name="option" id="select-option">
+       <option value="">--Selectionnez une option de recherche--</option>
+       <option value="bookinner">Boite à Livre</option>
+       <option value="book">Livre</option>
+       <option value="user">Utilisateur</option>
+    </select>
+        <h3>Boites à Livre existantes</h3>
+        <div id="map-parent">
+            <div id="map"></div>
+        </div>
     </body>
+
+        <script>
+        function initMap() {
+            var besancon = {lat: 47.247315, lng: 5.999222};
+            var map = new google.maps.Map(document.getElementById('map'), {zoom: 5.5, center: besancon});
+            var marker = new google.maps.Marker({position: besancon, map: map})
+        }
+        </script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdhMDAHADc7gKxLgJBWx6AoFj2yKrbW0c&callback=initMap">
+        </script>
+
 
     <section>
     {# Contiendra la carte indiquant les boîtes à livre #}
