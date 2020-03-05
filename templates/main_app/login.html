@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}<title>BookInner | Connection</title> {%endblock%}
+{% block content %}
+    <head>
+        <link href="payment-form.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static "main_app/css/login.css" %}"></link>
+        <script type="text/javascript" src="{% static "main_app/js/login.js" %}"></script>
+    </head>
+
+    <body>
+
+        <div id="login-form">
+            <fieldset>
+                <button id="registerForm" class="fieldset-button active" onclick="changeForm(0)"><h3>Inscription</h3></button>
+                <button id="loginForm" class="fieldset-button" onclick="changeForm(1)"><h3>Connection</h3></button>
+                <hr>
+                <div id="register">
+                    <h3>Créez votre compte!</h3>
+                    <form>
+                        <label for="username">Nom  <span class="required">*</span> :</label>
+                        <input id="username"/><br/>
+                        <label for="email">Email <span class="required">*</span> :</label>
+                        <input id="email"/><br/>
+                        <label for="adress">Adresse <span class="required">*</span> :</label>
+                        <input id="adress"/><br/>
+                        <label for="town">Ville <span class="required">*</span> :</label>
+                        <input id="town"/><br/>
+                        <label for="password">Mot de passe <span class="required">*</span> :</label>
+                        <input id="passwordRegister" type="password"/><span onclick="showPassword('passwordRegister')"><i id="passwordRegisterIcon" class="fa fa-eye icon"></i></span><br/>
+                        <br/><button>Créer son compte</button>
+                    </form>
+                </div>
+                <div id="login" hidden="true">
+                    <h3>Connectez vous</h3>
+                    <form>
+                        <label for="email">Email <span class="required">*</span> :</label>
+                        <input id="email"/><br/>
+                        <label for="password">Mot de Passe <span class="required">*</span> :</label>
+                        <input id="passwordLogin" type="password"/><span onclick="showPassword('passwordLogin')"><i id="passwordLoginIcon" class="fa fa-eye icon"></i></span><br/>
+                        <br/><button>Se connecter</button>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+    </body>
+{% endblock %}
