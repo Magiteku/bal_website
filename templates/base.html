@@ -2,14 +2,17 @@
 <html lang="fr">
     {% load static %}
     <head>
+        <link rel="stylesheet" href="{% static "main_app/css/base.css" %}"></link>
         <meta charset = "utf-8"/>
         {% block title %}{# Titre de la page #} {%endblock%}
         {% block nav %}
-        <nav> 
-            <ul> 
+        <nav id="navbar">
+            <ul>
+                <a href="/bookinner"><img id="logo" src="{% static "main_app/images/logo.png" %}"></a>
                 <li><a href = {% url 'forum_home' %}>Vers le forum</a></li>
-                <li><a href = {%url 'subscription' %}> Inscription/Connexion </a></li>
+                <li><a href = {%url 'login' %}> Inscription/Connexion </a></li>
                 {% comment %}
+                <li><i></i><a href = {%url 'profile' %}> Profil </a></li>
                 La ligne ci-dessus devra être modifié de tel sorte à ce qu'elle change selon si l'utilisateur
                 est connecté ou pas. L'url doit donc être une variable, idem pour le texte qui l'accompagne 
                 {%endcomment%}
