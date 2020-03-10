@@ -22,7 +22,7 @@ class Livre(models.Model):
         * recommendations (autres oeuvres liées)
         * date de parution
         * nombres de livre dispo
-        * boîte à livre contenant le livre
+        * boîtes à livre contenant le livre
         * date et position du dernier dépôt
     """
 
