@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Livre(models.Model):
@@ -51,29 +52,26 @@ class Livre(models.Model):
         return reverse('main_app.views.to_bookList').replace('list',self.slug_title)
 
 
-class Membre(models.Model):
-    """ Membre de la communauté Bookinner """
+class UserProfile(models.Model):
+    """ Profil d'un membre de la communauté Bookinner """
 
-    pseudo = models.CharField(max_length = 50, unique=True)
-    nom = models.CharField(max_length = 50)
-    prenom = models.CharField(max_length = 50)
-    imageProfil = models.ImageField(upload_to = "imagesDeProfil/")
-    slug_pseudo = models.SlugField(default = "", unique = True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    imageProfil = models.ImageField(upload_to = "imagesDeProfil/",blank=True,verbose_name = "Image de Profil")
+    # le verbose_name de imageProfil précisé dans le modèle est celui utilisé dans l'administration
+    slug_username = models.SlugField(default = "", unique = True, blank=True)
+  
 
-    """Rajouté un booléan pour vérifier la connection """
-    class Meta:
-        ordering = ['pseudo']
-    
     def save(self, *args, **kwargs):
+        # Verifier si cette condition est nécessaire
         if not self.id:
-            self.slug_pseudo = slugify(self.pseudo)
+            self.slug_username = slugify(self.user.username)
 
-        super(Membre,self).save(*args, **kwargs)
+        super(UserProfile,self).save(*args, **kwargs)
 
     def __str__(self):
 
-        s = "Pseudo du membre: " + self.pseudo + \
-            "\nIdentité du membre: " + self.prenom + " " + self.nom 
+        s = "Pseudo du membre: " + self.user.username + \
+            "\nIdentité du membre: " + self.user.first_name + " " + self.user.last_name 
         return s
 
     

@@ -1,0 +1,20 @@
+{%extends "base.html"%}
+{%load static%}
+{%block title%}<title>BookInner | Inscription</title> {%endblock%}
+{%block content%}
+    <head>
+        <link rel="stylesheet" href="{% static "main_app/css/login.css" %}"></link>
+    </head>
+
+    <body>
+        <h3>Créez votre compte!</h3>
+        <form action= "{%url 'subscription' %}" method="POST" enctype ="multipart/form-data">
+        {# enctype ="multipart/form-data" est nécessaire pour que le navigateur envoie les fichiers au serveur #}
+            {% csrf_token %}
+            {{user_form.as_ul}}
+            {{profile_form.as_ul}}
+            <input type="submit" value="Envoyer"/>
+        </form>
+    </body>
+
+{%endblock%}
