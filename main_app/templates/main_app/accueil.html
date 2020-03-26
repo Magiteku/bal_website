@@ -3,13 +3,14 @@
 {% block title %}<title>BookInner | Page d'accueil</title> {%endblock%}
 {% block content %}
     <header>
+      <link rel="stylesheet" href="{% static "main_app/css/base.css" %}"></link>
       <script type="text/javascript" src="{% static "main_app/js/accueil.js" %}"></script>
     </header>
 
     <body>
     <img style="height:30%; width:30%" src="{% static "main_app/images/logo.png" %}">
     <div id="research-bar">
-        <input/><button><i class='fa fa-search'></i></button>
+        <input name="q" id="id_q" placeholder="Rechercher" value= {{query}}><button><i class='fa fa-search'></i></button>
     </div>
     <select name="option" id="select-option">
        <option value="">--Selectionnez une option de recherche--</option>

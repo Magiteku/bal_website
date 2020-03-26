@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Livre, UserProfile
 from .forms import UserProfileForm, UserForm
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-
+from django.db.models import Q
+import operator
+from functools import reduce
 # Create your views here.
 
 EMPLACEMENT_LIVRE = "book"
@@ -21,8 +23,15 @@ def home(request):
      * Des pubs
 
      """
+    
+    query = ""
+    if request.GET:
+        query = str(request.GET['q'])
+        # q est le nom (attribut name) de la barre de recheche (cf base.html)
 
-    return render(request, 'main_app/accueil.html')
+    queryset = get_queryset(query)
+    
+    return render(request, 'main_app/accueil.html',locals())
 
 def to_forum(request):
     return render(request, 'main_app/forum.html')
@@ -41,7 +50,7 @@ def subscription(request):
     et n’a donc pas été complété par l’utilisateur ; le formulaire sera donc invalide.
     """
     user_form = UserForm(request.POST or None)
-    pageDeRetour = "main_app/signin.html"
+    pageDeRetour = redirect('home')
     if all([profile_form.is_valid(),user_form.is_valid()]):
 
         user = user_form.save()
@@ -65,27 +74,17 @@ def subscription(request):
 
 
         """
-        username = formMember.cleaned_data["user.username"]
-        first_name = formMember.cleaned_data["user.first_name"]
-        last_name = formMember.cleaned_data["user.last_name"]
-        imageProfil = formMember.cleaned_data["imageProfil"]
-        slug_username = slugify(username)
-        email = formMember.cleaned_data["user.email"]
-        #password = formMember.cleaned_data["password"]
-        user = User(username=username,first_name=first_name,last_name=last_name,email=email)
-        newMember = Membre(user=user,imageProfil=imageProfil,slug_username=slug_username)
         
         newMember.save() # sauvegarde du nouveau membre dans la base de données
         # important : regarder fonctionnement des signaux pre_save et post_save car à priori
         # nécessaire pour que l'attribut user de Membre se sauvegarde automatiquement lors de 
         # de la sauvegarde de l'objet Membre
         """
-        
-        pageDeRetour = "main_app/accueil.html"
-        # attention: la redirection ne change pas l'url. Voir comment procéder pour les redirections
-        
-    # on reste sur la page d'inscription dans tous les cas
-    return render(request,pageDeRetour,locals()) 
+    
+    else:
+        pageDeRetour = render(request,pageDeRetour,locals()) 
+    
+    return pageDeRetour
     # il faudra programmer une redirection automatique vers l'accueil si l'enregistrement est réussi
     # avec au préalable un message indiquant que l'enregistrement est réussi
 
@@ -97,7 +96,7 @@ def to_contact(request):
     return render(request, 'main_app/contact.html')
 
 def to_profile(request,pseudoSlug):
-    membre = UserProfil.objects.filter(slug_username = pseudoSlug)
+    membre = UserProfile.objects.filter(slug_username = pseudoSlug)
     """ Vérifier que le membre est connecté"""
     return render(request, 'main_app/profile.html',locals())
 
@@ -122,3 +121,53 @@ def to_login(request):
 
     return render(request,"main_app/login.html")
 
+
+def get_queryset(query=None):
+    """ Effectue une recherche dans la base de données du site
+    en fonction des termes de entrées dans la barre de recherche """
+
+    queryset = {
+        "livres":[],
+        "membres":[]}
+    # Il faudra rajouter les villes et les les boîtes à livres une fois les classes
+    # créées
+    queries = query.split(" ")
+
+    for q in queries:
+        livres = Livre.objects.filter(
+            Q(titre__icontains=q) | Q(auteur__icontains=q) | 
+            Q(resume__icontains=q) | Q(note__icontains=q) | Q(isbn__icontains=q)
+            | Q(edition__icontains=q)).distinct()
+
+        membres = UserProfile.objects.filter(
+            Q(user__username__icontains=q) | Q(user__first_name__icontains=q) |
+            Q(user__last_name__icontains=q)
+        ).distinct()
+
+        """
+        queryset["livres"].append(list(livres))
+        queryset["membres"].append(list(membres))
+        """
+        queryset["livres"].append(livres)
+        queryset["membres"].append(membres)
+
+    
+    """
+    queryset["livres"] = list(set(queryset["livres"]))
+    queryset["membres"] = list(set(queryset["membres"]))
+    """
+  
+    if any([queryset[key] == [] for key in queryset.keys()]):
+        queryset = {}
+
+    return queryset
+
+
+
+
+
+
+
+
+
+    

@@ -19,14 +19,34 @@
             </ul>
         </nav>
         {%comment%}
-        A rajouter:  l'image bookinner avec un lien associé qui permet de retourner à la page principal
-                    La barre de recherche
+        <div class ="search-bar mt-sm-2 mr-2">
+            <form method="get">
+                <input type="text" class="form-control" name="q" id="id_q" placeholder="Rechercher" value= {{query}}>
+            </form>
+        </div>
         {%endcomment%}
+        
         {% endblock %}
     </head>
 
     <body>
-        {% block content %} {# Contenu principal de la page #}{% endblock %}
+        {% if livre or membre%}
+            {%if livre %}
+                <h2>Résultats pour les livres:</h2>
+                {%for livre in livres%}
+                    <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">{{livre.titre}}</a></li>
+                {%endfor%}
+            {%endif%}
+            {%if membre%}
+                <h2>Résultats pour les membres</h2>
+                    {%for membre in membres%}
+                        <li> <a href = "{% url 'profile' pseudoSlug=membre.slug_username%}">{{membre.user.username}}</a></li>
+                    {%endfor%}
+            {%endif%}
+        {%else%}
+            {# Aucun résultat pour {{query}} #}
+            {% block content %} {# Contenu principal de la page #}{% endblock %}
+        {%endif%}
         {% block footer %}
             <footer>
                 <ul>

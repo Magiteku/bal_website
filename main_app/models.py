@@ -16,7 +16,9 @@ class Livre(models.Model):
     isbn = models.CharField(max_length = 50)
     edition = models.CharField(max_length = 50)
     """
-    A rajouter (foreignKey, OneToManyField, ManyToManyField ?):
+    boiteALivre = models.ForeignKey(BookBox, on_delete = models.CASCADE)
+
+    A rajouter (foreignKey, ManyToManyField ?):
         * avis sur le livre
         * membres ayant lu le livre
         * boîte à livre où on peut trouver le livre
@@ -74,4 +76,16 @@ class UserProfile(models.Model):
             "\nIdentité du membre: " + self.user.first_name + " " + self.user.last_name 
         return s
 
+class BookBox(models.Model):
+   """ Boite à livre """
+
+   """
+        A mettre en attributs/champs:
+        position géographique
+
+        A mettre en méthode:
+        Liste des livres présents dans la boite à livre
+        Mettre à jour la liste de livre qui sont dans la boite
+        
+    """
     
