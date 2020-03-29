@@ -10,7 +10,18 @@
     <body>
     <img style="height:30%; width:30%" src="{% static "main_app/images/logo.png" %}">
     <div id="research-bar">
-        <input name="q" id="id_q" placeholder="Rechercher" value= {{query}}><button><i class='fa fa-search'></i></button>
+        <form class="form-inline my-2 my-lg 1" >
+            <input 
+            class="form-inline my-2 my-lg-"
+            type="search"
+            name="query"  
+            id="id_query" 
+            placeholder="Rechercher" 
+            value={{query_term}}
+            ><button 
+            class ="btn btn-outline-success my-2 my-sm-0" 
+            type="submit"><i class='fa fa-search'></i></button>
+        </form>
     </div>
     <select name="option" id="select-option">
        <option value="">--Selectionnez une option de recherche--</option>

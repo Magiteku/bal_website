@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% block title%}<title> Bookinner | Résultats pour {{query_term}}</title>{% endblock %}
+{%block content%}
+    {%if availableResult%}
+        {%if livres %}
+            <h2>Résultats pour les livres:</h2>
+            {%for livre in livres%}
+                <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">{{livre.titre}}</a></li>
+            {%endfor%}
+        {%endif%}
+        {%if membres%}
+            <h2>Résultats pour les membres</h2>
+                {%for membre in membres%}
+                    <li> <a href = "{% url 'profile' pseudoSlug=membre.slug_username%}">{{membre.user.username}}</a></li>
+                {%endfor%}  
+        {%endif%}
+    {%else%}
+        <h3>Aucun résultat pour {{query_term}}</h3>
+    {%endif%}
+{%endblock%}

@@ -24,14 +24,30 @@ def home(request):
 
      """
     
-    query = ""
-    if request.GET:
-        query = str(request.GET['q'])
+    query_term = ""
+    livres,membres = Livre.objects.none(),UserProfile.objects.none()
+    availableResult = False # devient True si on trouve au moins 1 résultat
+    pageDeRetour='main_app/accueil.html'
+    if 'query' in request.GET:
+        query_term = str(request.GET['query'])
         # q est le nom (attribut name) de la barre de recheche (cf base.html)
 
-    queryset = get_queryset(query)
+    if query_term != "":
+        for key, value in get_queryset(query_term).items():
+          
+            if key == "livres":
+                livres = value
+            elif key == "membres":
+                membres = value
+            else:
+                continue
+        pageDeRetour = 'main_app/recherches.html'
     
-    return render(request, 'main_app/accueil.html',locals())
+    # s'il y a au moins 1 résultat:
+    if any([subquery.exists() for subquery in [livres,membres]]):
+        availableResult = True 
+ 
+    return render(request, pageDeRetour,locals())
 
 def to_forum(request):
     return render(request, 'main_app/forum.html')
@@ -124,41 +140,32 @@ def to_login(request):
 
 def get_queryset(query=None):
     """ Effectue une recherche dans la base de données du site
-    en fonction des termes de entrées dans la barre de recherche """
+    en fonction des termes de entrées dans la barre de recherche
+    -> dictionnaire de queryset, vide si aucun résultat trouvé """
 
     queryset = {
-        "livres":[],
-        "membres":[]}
+        "livres": Livre.objects.none(), # query_set vide
+        "membres": UserProfile.objects.none()}
     # Il faudra rajouter les villes et les les boîtes à livres une fois les classes
     # créées
     queries = query.split(" ")
 
     for q in queries:
+      
         livres = Livre.objects.filter(
             Q(titre__icontains=q) | Q(auteur__icontains=q) | 
             Q(resume__icontains=q) | Q(note__icontains=q) | Q(isbn__icontains=q)
-            | Q(edition__icontains=q)).distinct()
-
+            | Q(edition__icontains=q))
+      
         membres = UserProfile.objects.filter(
             Q(user__username__icontains=q) | Q(user__first_name__icontains=q) |
             Q(user__last_name__icontains=q)
-        ).distinct()
-
-        """
-        queryset["livres"].append(list(livres))
-        queryset["membres"].append(list(membres))
-        """
-        queryset["livres"].append(livres)
-        queryset["membres"].append(membres)
-
-    
-    """
-    queryset["livres"] = list(set(queryset["livres"]))
-    queryset["membres"] = list(set(queryset["membres"]))
-    """
-  
-    if any([queryset[key] == [] for key in queryset.keys()]):
-        queryset = {}
+        )
+        
+        # queryset["livres"].union(livres) ne marche pas avec des query set vides pour des raisons inconnues
+        queryset["livres"]|=livres # alternative qui fonctionne mais pourrait peut-être problématique à l'avenir
+        queryset["membres"]|=membres
+   
 
     return queryset
 

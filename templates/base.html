@@ -30,23 +30,7 @@
     </head>
 
     <body>
-        {% if livre or membre%}
-            {%if livre %}
-                <h2>Résultats pour les livres:</h2>
-                {%for livre in livres%}
-                    <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">{{livre.titre}}</a></li>
-                {%endfor%}
-            {%endif%}
-            {%if membre%}
-                <h2>Résultats pour les membres</h2>
-                    {%for membre in membres%}
-                        <li> <a href = "{% url 'profile' pseudoSlug=membre.slug_username%}">{{membre.user.username}}</a></li>
-                    {%endfor%}
-            {%endif%}
-        {%else%}
-            {# Aucun résultat pour {{query}} #}
-            {% block content %} {# Contenu principal de la page #}{% endblock %}
-        {%endif%}
+        {% block content %} {# Contenu principal de la page #}{% endblock %}
         {% block footer %}
             <footer>
                 <ul>
