@@ -137,6 +137,11 @@ def to_login(request):
 
     return render(request,"main_app/login.html")
 
+def to_desc(request):
+    return render(request,"main_app/descriptionLivre.html")
+
+def to_listing(request):
+    return render(request,"main_app/listeDesLivres.html")
 
 def get_queryset(query=None):
     """ Effectue une recherche dans la base de données du site

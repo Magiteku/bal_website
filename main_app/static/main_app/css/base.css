@@ -1,0 +1,126 @@
+#logo {
+    padding-top: 1%;
+    padding-right: 1%;
+    width: 10%;
+    height: 10%;
+    float: left;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    left: 40%;
+    text-align: center;
+}
+
+footer ul {
+      list-style-type: none;
+      overflow: hidden;
+}
+
+footer ul {
+      list-style-type: none;
+      overflow: hidden;
+      background-color: #ffffff;
+}
+
+footer li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 45px 45px;
+}
+
+footer li a:hover {
+  background-color:  #d9d9d9;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#research-bar {
+    padding-top: 2%;
+}
+
+#research-bar input {
+    font-size: 40px;
+}
+
+#research-bar button {
+    font-size: 40px;
+}
+
+#research-bar select {
+    font-size: 15px;
+}
+
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #13a149;
+}
+
+nav li {
+  float: left;
+}
+
+footer li {
+  float: left;
+}
+
+footer li a {
+  display: block;
+  text-align: center;
+  padding: 45px 45px;
+  text-decoration: none;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 45px 45px;
+  text-decoration: none;
+}
+
+nav li div {
+  float: right;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 35px 45px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #0a943f;
+}
+
+.right {
+    float:right;
+}
+
+body {
+    margin-top: 10%;
+    text-align: center;
+}
+
+#map-parent {
+    display: flex;
+    justify-content: center;
+}
+
+#map {
+    width: 30%;
+    height: 400px;
+    background-color: grey;
+}
+

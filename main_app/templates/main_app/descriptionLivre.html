@@ -1,10 +1,43 @@
 {% extends "base.html" %}
 {% block title%}<title> BookInner | {{livre.titre}} </title> {% endblock %}
 {% block content %}
+     {% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static "main_app/css/base.css" %}"></link>
+        <link rel="stylesheet" href="{% static "main_app/css/descLivre.css" %}"></link>
+    	<script src="https://kit.fontawesome.com/95022c06f9.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static "main_app/js/descLivre.js" %}"></script>
+    </head>
+
     <h1>{{livre.titre}}</h1>
-    
-    <img src = "{{livre.couverture.url}}" />
-    <ul>
+
+    <div class="livre">
+        <div class="imgsection">
+            <img class="livreImage" src="{% static "main_app/images/couverture.png" %}">
+        </div>
+        <div class="description">
+            <h1><u>Titre de livre</u>
+                <div class="stars">
+                    <i id="star1" class="fa fa-star"></i>
+                    <i id="star2" class="fa fa-star"></i>
+                    <i id="star3" class="fa fa-star"></i>
+                    <i id="star4" class="fa fa-star"></i>
+                    <i id="star5" class="fa fa-star"></i>
+	            </div>
+            </h1>
+
+                Auteur: Michel </br>
+                Edition: florale </br>
+
+                <hr>
+                Resumé: Un très bon livre qui mérite vraiment d'etre lu par tous, je vais pas vous spoil l'histoire quand meme</br>
+        </div>
+            {# A compléter avec les autres champs #}
+    </div>
+
+       {% comment %}
+        <img src = "{{livre.couverture.url}}" />
+        <ul>
         <li>Auteur: {{livre.auteur}} </li>
         <li>Edition: {{livre.edition}} </li>
         <li>Resumé: {{livre.resume}}</li>
@@ -12,4 +45,8 @@
         <li>ISBN: {{livre.isbn}} </li>
         {# A compléter avec les autres champs #}
     </ul>
+     {% endcomment %}
+    <script>
+        setStars(3);
+    </script>
 {% endblock %}

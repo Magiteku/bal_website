@@ -1,0 +1,33 @@
+.livre img {
+    width: 40%;
+}
+
+.livre {
+    margin-bottom: 5%;
+}
+
+.livre div {
+    display: inline-block;
+    width: 43%;
+}
+
+.livre .description {
+    top: 0;
+    float: right;
+    text-align: left;
+    margin-right: 10%;
+}
+
+hr {
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.fa-star {
+	color: gray;
+	cursor: pointer;
+}
+
+.fa-star.gold {
+	color: #ffdc0f;
+}

@@ -1,0 +1,36 @@
+.bookList {
+  list-style-type: none;
+  margin-left: 30%;
+  overflow: hidden;
+}
+
+.bookList li {
+    width: 50%;
+}
+
+.bookList li a {
+    display: inline-block;
+    color : black;
+    padding: 1%;
+    text-decoration: none;
+    background-color: #e6e8e6;
+    border: 1px solid black;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.bookList a img {
+    width: 100%;
+}
+
+.bookImg {
+    float: left;
+    width: 10%;
+}
+
+.bookList li a:hover {
+  background-color: #cacfcc;
+}

@@ -1,10 +1,31 @@
-{%extends "base.html" %}
-{% block title%}BookInner | Livres disponibles {%endblock%}
+{% extends "base.html" %}
+{% block title %}BookInner | Livres disponibles {%endblock%}
 {% block content %}
+    {% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static "main_app/css/base.css" %}"></link>
+        <link rel="stylesheet" href="{% static "main_app/css/listLivre.css" %}"></link>
+    	<script src="https://kit.fontawesome.com/95022c06f9.js" crossorigin="anonymous"></script>
+    </head>
+
     <h1>Livres actuellement présent dans nos boîtes à livres</h1>
-    <ul>
+    <ul class="bookList">
+        {% comment %}
         {%for livre in livres%}
            <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">{{livre.titre}}</a></li>
         {%endfor%}
+        {% endcomment %}
+        <li><a href="{%url 'desc' %}">
+           <div class="bookImg"><img src="{% static "main_app/images/couverture.png" %}"></div>
+             </br><div class="title"><h3><u>Livre genial 1</u></h3></div>
+        </a></li></br>
+           <li><a href="{%url 'desc' %}">
+           <div class="bookImg"><img src="{% static "main_app/images/couverture.png" %}"></div>
+           </br> <div class="title"><h3><u>Livre genial 2</u></h3></div>
+        </a></li></br>
+        <li><a href="{%url 'desc' %}">
+           <div class="bookImg"><img src="{% static "main_app/images/couverture.png" %}"></div>
+             </br><div class="title"><h3><u>Livre genial 3</u></h3></div>
+        </a></li></br>
     </ul>
 {%endblock%}
