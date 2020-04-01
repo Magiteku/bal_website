@@ -111,9 +111,9 @@ def to_contact(request):
     return render(request, 'main_app/contact.html')
 
 def to_profile(request,pseudoSlug):
-    membre = UserProfile.objects.filter(slug_username = pseudoSlug)
-    print(membre)
-    """ Vérifier que le membre est connecté"""
+    membre = UserProfile.objects.filter(slug_username = pseudoSlug).first()
+    # .first() permet de récuperer l'objet. Sinon membre est une querySet avec 1 objet dedans
+    # Vérifier que le membre est connecté
     return render(request, 'main_app/profile.html',locals())
 
 def to_bookList(request):
