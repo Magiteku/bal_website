@@ -10,22 +10,12 @@
 
     <h1>Livres actuellement présent dans nos boîtes à livres</h1>
     <ul class="bookList">
-        {% comment %}
+        
         {%for livre in livres%}
-           <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">{{livre.titre}}</a></li>
+           <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">
+                <div class "bookImg"><img src = "{{livre.couverture.url}}"></div>
+                </br><div class="title"<h3><u>{{livre.titre}}</u></h3></div>
+            </a></li></br>
         {%endfor%}
-        {% endcomment %}
-        <li><a href="{%url 'desc' %}">
-           <div class="bookImg"><img src="{% static "main_app/images/couverture.png" %}"></div>
-             </br><div class="title"><h3><u>Livre genial 1</u></h3></div>
-        </a></li></br>
-           <li><a href="{%url 'desc' %}">
-           <div class="bookImg"><img src="{% static "main_app/images/couverture.png" %}"></div>
-           </br> <div class="title"><h3><u>Livre genial 2</u></h3></div>
-        </a></li></br>
-        <li><a href="{%url 'desc' %}">
-           <div class="bookImg"><img src="{% static "main_app/images/couverture.png" %}"></div>
-             </br><div class="title"><h3><u>Livre genial 3</u></h3></div>
-        </a></li></br>
     </ul>
 {%endblock%}

@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.core.files import File
 # Create your models here.
 
 class Livre(models.Model):
@@ -45,6 +46,7 @@ class Livre(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug_title = slugify(self.titre)
+            
 
         super(Livre,self).save(*args, **kwargs)
 
@@ -58,7 +60,8 @@ class UserProfile(models.Model):
     """ Profil d'un membre de la communauté Bookinner """
 
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    imageProfil = models.ImageField(upload_to = "imagesDeProfil/",blank=True,verbose_name = "Image de Profil")
+    imageProfil = models.ImageField(upload_to = "imagesDeProfil/",blank=True,verbose_name = "Image de Profil",
+            default='static/images/profil_defaut.png')
     # le verbose_name de imageProfil précisé dans le modèle est celui utilisé dans l'administration
     slug_username = models.SlugField(default = "", unique = True, blank=True)
   
@@ -71,9 +74,11 @@ class UserProfile(models.Model):
         super(UserProfile,self).save(*args, **kwargs)
 
     def __str__(self):
-
+        """
         s = "Pseudo du membre: " + self.user.username + \
             "\nIdentité du membre: " + self.user.first_name + " " + self.user.last_name 
+        """
+        s = str(self.user.username)
         return s
 
 class BookBox(models.Model):

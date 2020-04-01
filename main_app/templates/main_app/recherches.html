@@ -1,18 +1,36 @@
 {% extends 'base.html'%}
 {% block title%}<title> Bookinner | Résultats pour {{query_term}}</title>{% endblock %}
 {%block content%}
+    {%load static%}
+    <head>
+        <link rel="stylesheet" href="{% static "main_app/css/base.css" %}"></link>
+        <link rel="stylesheet" href="{% static "main_app/css/listLivre.css" %}"></link>
+        <link rel="stylesheet" href="{% static "main_app/css/listUser.css" %}"></link>
+    	<script src="https://kit.fontawesome.com/95022c06f9.js" crossorigin="anonymous"></script>
+    </head>
     {%if availableResult%}
+
         {%if livres %}
             <h2>Résultats pour les livres:</h2>
-            {%for livre in livres%}
-                <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">{{livre.titre}}</a></li>
-            {%endfor%}
+            <ul class = "bookList">
+                {%for livre in livres%}
+                    <li><a href = "{%url 'book' bookSlug=livre.slug_title %}">
+                    <div class "bookImg"><img src = "{{livre.couverture.url}}"></div>
+                    </br><div class="title"<h3><u>{{livre.titre}}</u></h3></div>
+                </a></li></br>
+                {%endfor%}
+            </ul>
         {%endif%}
         {%if membres%}
             <h2>Résultats pour les membres</h2>
+            <ul class = "userList">
                 {%for membre in membres%}
-                    <li> <a href = "{% url 'profile' pseudoSlug=membre.slug_username%}">{{membre.user.username}}</a></li>
+                    <li><a href = "{%url 'profile' pseudoSlug=membre.slug_username %}">
+                <div class "userImg"><img src = "{{membre.imageProfil.url}}"></div>
+                </br><div class="username"<h3><u>{{membre.user.username}}</u></h3></div>
+                </a></li></br>
                 {%endfor%}  
+            </ul>
         {%endif%}
     {%else%}
         <h3>Aucun résultat pour {{query_term}}</h3>

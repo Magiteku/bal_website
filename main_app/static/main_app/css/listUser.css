@@ -1,0 +1,37 @@
+.userList {
+    list-style-type: none;
+    margin-left: 30%;
+    overflow: hidden;
+  }
+  
+  .userList li {
+      width: 50%;
+  }
+  
+  .userList li a {
+      display: inline-block;
+      color : black;
+      padding: 1%;
+      text-decoration: none;
+      background-color: #e6e8e6;
+      border: 1px solid black;
+  }
+  
+  .username {
+      display: flex;
+      justify-content: center;
+  }
+  
+  .userList a img {
+      width: 100%;
+  }
+  
+  .userImg {
+      float: left;
+      width: 10%;
+  }
+  
+  .userList li a:hover {
+    background-color: #cacfcc;
+  }
+  

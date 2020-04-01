@@ -1,2 +1,37 @@
 {% extends "base.html" %}
-{% block title %}<title>BookInner | Forum</title> {%endblock%}
+{% block title%}<title> BookInner | {{membre.user.username}} </title> {% endblock %}
+{% block content %}
+
+     {% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static "main_app/css/base.css" %}"></link>
+    	<script src="https://kit.fontawesome.com/95022c06f9.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static "main_app/js/descLivre.js" %}"></script>
+    </head>
+
+    <h1>{{membre.user.username}}</h1>
+    <div class="membre">
+        <div class="imgsection">
+            <img class="imageProfil" src="{{membre.imageProfil}}"/>
+        </div>
+        <div class="infoPerso">
+            {%comment%}
+            L'affichage du prénom, nom, lieu de vie et autres données
+            personnelles sera controlé via des variables booléennes 
+            représentant ce que souhaite l'utilisateur. Les conditions suivantes
+            sont temportaires, mises juste pour avoir un visuel du profil 
+            quand on affiche toutes les infos 
+            {%endcomment%}
+            <ul>
+                {%if membre.user.first_name%}
+                    <li>Prénom: {{membre.user.first_name}}</li>
+                {%endif%}
+                {%if membre.user.last_name%}
+                    <li>Nom: {{membre.user.last_name}}</li>
+                {%endif%}
+                <li>Membre depuis: {{membre.user.date_joined}}</li>
+                <li>Dernière connection: {{membre.user.last_login}}</li>
+            </ul>
+                
+
+{% endblock %}

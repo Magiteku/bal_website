@@ -90,7 +90,6 @@ def subscription(request):
 
 
         """
-        
         newMember.save() # sauvegarde du nouveau membre dans la base de données
         # important : regarder fonctionnement des signaux pre_save et post_save car à priori
         # nécessaire pour que l'attribut user de Membre se sauvegarde automatiquement lors de 
@@ -113,6 +112,7 @@ def to_contact(request):
 
 def to_profile(request,pseudoSlug):
     membre = UserProfile.objects.filter(slug_username = pseudoSlug)
+    print(membre)
     """ Vérifier que le membre est connecté"""
     return render(request, 'main_app/profile.html',locals())
 
@@ -136,12 +136,6 @@ def to_login(request):
     """Redirige vers la page de connexion """
 
     return render(request,"main_app/login.html")
-
-def to_desc(request):
-    return render(request,"main_app/descriptionLivre.html")
-
-def to_listing(request):
-    return render(request,"main_app/listeDesLivres.html")
 
 def get_queryset(query=None):
     """ Effectue une recherche dans la base de données du site
