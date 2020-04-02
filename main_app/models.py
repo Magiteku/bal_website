@@ -9,7 +9,7 @@ class Livre(models.Model):
     titre = models.CharField(max_length = 50)
     slug_title = models.SlugField(default = "")
     auteur = models.CharField(max_length = 50)
-    resume = models.TextField(max_length = 500)
+    resume = models.TextField(max_length = 1000)
     couverture = models.ImageField(upload_to="couvertures/")
     # les couvertures seront enregistrés dans le dossier MEDIA_ROOT/couvertures/
     note = models.PositiveSmallIntegerField()

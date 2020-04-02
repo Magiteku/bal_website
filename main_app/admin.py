@@ -49,6 +49,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('username','slug_username','email','first_name','last_name','imageProfil',
         'is_active','is_staff','is_superuser')
     search_fields = ('username', 'last_name', 'first_name','email')
+    
 
     def slug_username(self,obj):
         """Retourne le champ slug_username de UserProfile """
@@ -59,6 +60,8 @@ class UserAdmin(BaseUserAdmin):
     def imageProfil(self,obj):
         """ Retourne l'image de profil du UserProfile """
         return obj.userprofile.imageProfil
+
+
 
 
 
